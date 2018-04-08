@@ -2,7 +2,7 @@
 # rTorrent #
 #############
    rtorrent:
-    image: xataz/rtorrent-rutorrent
+    image: xataz/rtorrent-rutorrent:latest-filebot
     container_name: dl-torrent_rtorrent
     restart: always
     hostname: torrent
@@ -14,15 +14,17 @@
     volumes:
       - WEBROOT=/
       - INCOMING:/data:rw
-      - CONF/rtorrent/conf:/config:rw
+      - CONF/rtorrent/config:/config:rw
+      - CONF/rtorrent/usr/local/bin/postdl:/usr/local/bin/postdl:rw
+      - CONF/rtorrent/usr/local/bin/postrm:/usr/local/bin/postrm:rw
       - /etc/localtime:/etc/localtime:ro
     environment:
-      - DHT_RTORRENT=on
-      - PORT_RTORRENT=6881
-      - UID=1069
-      - GID=1069
+      - CONTEXT_PATH=/
+      - FILEBOT_RENAME_METHOD=symlink
+      - RTORRENT_SCGI=9000
+      - PUID=991
+      - PGID=991
     ports:
-      - 6881:6881
-      - 6881/udp:6881/udp
+      - 45000:45000
     networks:
       - traefik_proxy
