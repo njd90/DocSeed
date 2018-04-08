@@ -18,7 +18,7 @@ if [ ! -f /etc/debian_version ]; then
 fi
 
 # Check if root or sudo:
-if [[ $(id -u) -ne 0 ]] ; then 
+if [[ $(id -u) -ne 0 ]] ; then
   echo 'Please run me as root or with sudo'
   exit 1
 fi
@@ -31,7 +31,7 @@ apt-get update
 apt-get -y upgrade
 apt-get -y install dialog sudo apt-transport-https ca-certificates curl dnsutils software-properties-common
 
-# Variables includes 
+# Variables includes
 source config.local
 
 # Installation menu begin
@@ -46,7 +46,7 @@ if [ ! -z $(docker --version | grep "not found") ]; then
   case $? in
        0)# Install docker
 	 source $SCRPATH/ins_docker.sh
-	
+
 	 # Install docker-compose
 	 source $SCRPATH/ins_docker-compose.sh
          ;;
@@ -56,22 +56,22 @@ if [ ! -z $(docker --version | grep "not found") ]; then
          ;;
   esac
 fi
-# Define the root path 
+# Define the root path
 D_PATH=($DIALOG --title " Root path " --clear \
              --inputbox "Please set the root path of your installation
 ( default to /home/seebox ) :" 16 75 "/home/seebox")
 DEFAULT_PATH=$("${D_PATH[@]}" 2>&1 >/dev/tty)
-# Define the incoming path 
+# Define the incoming path
 I_PATH=($DIALOG --title " Incoming path " --clear \
         --inputbox "Please set the path of your incoming folder
 ( default to $DEFAULT_PATH/incoming ) :" 16 75 "$DEFAULT_PATH/incoming")
 INC_PATH=$("${I_PATH[@]}" 2>&1 >/dev/tty)
-# Define the media path 
+# Define the media path
 M_PATH=($DIALOG --title " Media path " --clear \
         --inputbox "Please set the path of your media folder
 ( default to $DEFAULT_PATH/media ) :" 16 75 "$DEFAULT_PATH/media")
 MEDIA_PATH=$("${M_PATH[@]}" 2>&1 >/dev/tty)
-# Define the containers' configuration path 
+# Define the containers' configuration path
 C_PATH=($DIALOG --title " Configuration path " --clear \
         --inputbox "Please set the path where you want to store apps configuration files
 ( default to $PWD/files/apps ) :" 16 75 "$PWD/files/apps")
@@ -97,6 +97,7 @@ options=("Traefik" "Proxy and certificates manager (Mandatory)" on
          "rTorrent-r" "Download : Torrents with rutorrent interface (Choose ONE rtorrent)" off
          "SABnzdb" "Download : Newsgroups" off
          "Emby" "Streaming : Video" off
+         "Plex" "Streaming : Video" off
          "Libresonic" "Streaming : Music" off
          "Ubooquity" "Streaming : Comics" off
          "Radarr" "Automation : Movies" off

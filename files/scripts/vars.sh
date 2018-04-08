@@ -9,8 +9,8 @@ MAIL=me@myDomain.tld
 #### OPTIONAL ####
 
 #--- Define user and group ID for all apps. Realy important in order to have all apps access the files.
-SUID=1069
-SGID=1069
+SUID=991
+SGID=991
 
 #--- Generic vars
 TIME_ZONE=Europe/Paris
@@ -26,6 +26,7 @@ Nx_SDOM=nextcloud                # Nextcloud
 Hp_SDOM=headphones               # HeadPhones
 My_SDOM=mylar                    # Mylar
 Eb_SDOM=emby                     # Emby
+Px_SDOM=plex                     # Plex
 Ub_SDOM=ubooquity                # Ubooquity
 Ua_SDOM=ubooquity-adm            # Ubooquity's admin insterface
 Ls_SDOM=libresonic               # Libresonic
@@ -46,6 +47,7 @@ Nx_CNAME=cloud-nextcloud                # Nextcloud
 Hp_CNAME=autodl-music_Headphones        # HeadPhones
 My_CNAME=autodl-comics_Mylar            # Mylar
 Eb_CNAME=stream-video_Emby              # Emby
+Px_CNAME=stream-video_Plex              # Plex
 Ub_CNAME=stream-comics_Ubooquity        # Ubooquity
 Ls_CNAME=stream-music_Libresonic        # Libresonic
 Ov_CNAME=openvpn                        # OpenVPN
@@ -67,7 +69,7 @@ LAN=$(hostname -I | awk '{print $1}')
 WAN=$(dig +short myip.opendns.com @resolver1.opendns.com)
 FQDN=$(hostname -f)
 HNAME=$(hostname)
-IFACE=$LAN # default interface 
+IFACE=$LAN # default interface
 RDNS=$(dig +short -x $WAN)
 RDNS=${RDNS::-1}
 DOMAIN="${DOMAIN:-$RDNS}"
