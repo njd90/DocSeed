@@ -6,6 +6,12 @@
 DOMAIN=myDomain.tld
 MAIL=me@myDomain.tld
 
+#--- Set your info for bind update.
+RFC2136_KEY=
+RFC2136_SECRET=
+RFC2136_ALGO=
+RFC2136_NS=
+
 #### OPTIONAL ####
 
 #--- Define user and group ID for all apps. Realy important in order to have all apps access the files.

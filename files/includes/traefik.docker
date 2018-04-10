@@ -1,33 +1,26 @@
 ###########
 # Traefik #
 ###########
-   traefik:
-    restart: unless-stopped
-    image: traefik:1.5-alpine
+  traefik:
+    image: traefik:1.6.0-rc4-alpine
     container_name: proxy_traefik
     hostname: traefik
-    command: 
-      --defaultEntryPoints='http,https'
-      --web
-      --web.address=:8080
-      --entryPoints='Name:http Address::80  Redirect.EntryPoint:https' 
-      --entryPoints='Name:https Address::443 TLS' 
-      --acme
-      --acme.email=EMAIL_CH
-      --acme.storage=/certs/acme.json 
-      --acme.entryPoint=https 
-      --acme.ondemand=false
-      --acme.onhostrule=true
-      --acme.httpChallenge.entryPoint=http
-      --docker
-      --docker.domain=domain.tld
-      --docker.watch
-      --docker.exposedbydefault=false
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro  
-      - CONF/certs:/certs
+    command: --api --docker
+    restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
+      - 8080:8080
     networks:
       - traefik_proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - CONF/traefik/traefik.toml:/traefik.toml
+      - CONF/traefik/acme.json:/acme.json
+      - CONF/certs:/certs
+    environment:
+      - RFC2136_TSIG_KEY=RFC2136_KEY
+      - RFC2136_TSIG_SECRET=RFC2136_SECRET
+      - RFC2136_TSIG_ALGORITHM=RFC2136_ALGO
+      - RFC2136_NAMESERVER=RFC2136_NS
