@@ -1,7 +1,7 @@
 ###########
 # Traefik #
 ###########
-  traefik:
+   traefik:
     image: traefik:1.6.0-rc4-alpine
     container_name: proxy_traefik
     hostname: traefik
