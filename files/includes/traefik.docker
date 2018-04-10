@@ -16,7 +16,7 @@
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - CONF/traefik/traefik.toml:/etc/traefik/traefik.toml/traefik.toml:rw
+      - CONF/traefik/traefik.toml:/etc/traefik/traefik.toml:rw
       - CONF/traefik/acme.json:/acme.json:rw
       - CONF/certs:/certs
     environment:
