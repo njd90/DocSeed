@@ -129,15 +129,23 @@ chown -R $SUID:$SGID $DEFAULT_PATH
 chown -R $SUID:$SGID $INC_PATH
 chown -R $SUID:$SGID $MEDIA_PATH
 
-# Update Muximux conf
-mkdir -p $CONF_PATH/muximux/conf/www/muximux
-cp files/includes/muximux.conf $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
-chown -R $SUID:$SGID $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
-
 # Generate and start all needeed containers
 docker network create traefik_proxy
 docker-compose up -d
 sleep 10
+
+# Update Muximux conf
+for APP in "${INSTALLED[@]}"
+do
+        if [ "$APP" == "Mx" ]
+        then
+                mkdir -p $CONF_PATH/muximux/conf/www/muximux
+                cp files/includes/muximux.conf $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
+                chown -R $SUID:$SGID $CONF_PATH/muximux/conf/www/muximux/settings.ini.php
+                echo "Restart tool-manage_Muximux"
+                docker restart tool-manage_Muximux
+        fi
+done
 
 # Writing a beautifull resume
 for APP in "${INSTALLED[@]}"
