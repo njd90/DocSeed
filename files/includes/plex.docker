@@ -6,6 +6,8 @@
     container_name: stream-video_plex
     restart: always
     hostname: video
+    ports:
+      - 32400:32400    
     labels:
       - traefik.enable=true
       - traefik.frontend.rule=Host:FQDN
@@ -19,5 +21,6 @@
     environment:
       - APP_UID=1069
       - APP_GID=1069
+      - VERSION=latest
     networks:
       - traefik_proxy
