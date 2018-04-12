@@ -2,16 +2,27 @@
 # Plex #
 ########
    plex:
-    image: linuxserver/plex
+    image: plexinc/pms-docker:plexpass
     container_name: stream-video_plex
     restart: always
-    hostname: video
+    hostname: plex
     ports:
-      - 32400:32400    
+    - "32400:32400"
+    - "32400:32400/udp"
+    - "32469:32469"
+    - "32469:32469/udp"
+    - "5353:5353/udp"
+    - "1900:1900/udp"
+    - "3005:3005/tcp"
+    - "8324:8324/tcp"
+    - "32410:32410/udp"
+    - "32412:32412/udp"
+    - "32413:32413/udp"
+    - "32414:32414/udp"
     labels:
       - traefik.enable=true
       - traefik.frontend.rule=Host:FQDN
-      - traefik.backend.port=32400
+      - traefik.port=32400
       - traefik.docker.network=traefik_proxy
     volumes:
       - MOVIES:/data:ro
@@ -22,5 +33,7 @@
       - APP_UID=1069
       - APP_GID=1069
       - VERSION=latest
+      - "ADVERTISE_IP=http://172.18.0.40:32400/"
     networks:
-      - traefik_proxy
+      traefik_proxy:
+         ipv4_address: 172.18.0.40
