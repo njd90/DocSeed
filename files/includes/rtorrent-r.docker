@@ -12,8 +12,10 @@
       - traefik.backend.port=8080
       - traefik.docker.network=traefik_proxy
     volumes:
-      - WEBROOT=/
-      - INCOMING:/data:rw
+      - HOME/media:/data/Media:rw
+      - HOME/sessions:/data/.session:rw
+      - HOME/torrents:/data/torrents:rw
+      - INCOMING:/data/.watch:rw
       - CONF/rtorrent/config:/config:rw
       - CONF/rtorrent/usr/local/bin/postdl:/usr/local/bin/postdl:rw
       - CONF/rtorrent/usr/local/bin/postrm:/usr/local/bin/postrm:rw

@@ -6,6 +6,7 @@ cat files/includes/rtorrent-r.docker >> docker-compose.yml
 sed -i "s@FQDN@$Rt_SDOM.$DOMAIN@g" docker-compose.yml
 sed -i "s@INCOMING@$INC_PATH@g" docker-compose.yml
 sed -i "s@dl-torrent_rtorrent@$Rt_CNAME@g" docker-compose.yml
+sed -i "s@HOME@$DEFAULT_PATH@g" docker-compose.yml
 
 # Set Muximux configuration
 cat <<EOF >> files/includes/muximux.conf
