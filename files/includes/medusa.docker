@@ -12,7 +12,7 @@
       - traefik.docker.network=traefik_proxy
     volumes:
       - CONF/medusa:/config
-      - HOME/media/tv:/tv
+      - TVSHOWS:/tv
       - INCOMING:/downloads
       - /etc/localtime:/etc/localtime:ro
     restart: always
