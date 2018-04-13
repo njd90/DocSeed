@@ -2,7 +2,9 @@
 # rTorrent with rutorrent interface installation
 
 cat files/includes/rtorrent-r.docker >> docker-compose.yml
-cat files/includes/postdl > $CONF/rtorrent/usr/local/bin/postdl 
+touch $CONF/rtorrent/usr/local/bin/postdl
+touch $CONF/rtorrent/usr/local/bin/postrm
+cat files/includes/postdl > $CONF/rtorrent/usr/local/bin/postdl
 cat files/includes/postrm > $CONF/rtorrent/usr/local/bin/postrm
 
 sed -i "s@FQDN@$Rt_SDOM.$DOMAIN@g" docker-compose.yml
