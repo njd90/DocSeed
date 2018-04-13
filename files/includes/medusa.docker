@@ -11,7 +11,8 @@
       - traefik.backend.port=8080
       - traefik.docker.network=traefik_proxy
     volumes:
-      - CONF/medusa:/data
+      - CONF/medusa:/config
+      - HOME/media/tv:/tv
       - INCOMING:/downloads
       - /etc/localtime:/etc/localtime:ro
     restart: always

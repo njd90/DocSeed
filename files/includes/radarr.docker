@@ -11,6 +11,7 @@
       - traefik.docker.network=traefik_proxy
     volumes:
       - CONF/radarr:/config
+      - HOME/media/movies:/movies
       - INCOMING:/downloads
       - RMOVIES:/movies
     restart: always
@@ -20,4 +21,3 @@
       - TZ=Europe/Paris
     networks:
       - traefik_proxy
-

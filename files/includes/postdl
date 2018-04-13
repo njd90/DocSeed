@@ -1,0 +1,57 @@
+#!/bin/sh
+
+# rtorrent.rc
+# system.method.set_key=event.download.finished,filebot,"execute={rtorrent-postprocess.sh,$d.get_base_path=,$d.get_name=,$d.get_custom1=}"
+
+TORRENT_PATH="$1"
+TORRENT_NAME="$2"
+TORRENT_LABEL="$(echo $3 | tr '[:upper:]' '[:lower:]')"
+
+
+case $TORRENT_LABEL in
+    films|movies|film|movie)
+        /filebot/filebot.sh --db TheMovieDB -script fn:amc --output "/data/Media" --action symlink --conflict skip -non-strict --log-file amc.log --def excludeList=amc.excludes unsorted=y "movieFormat=/data/Media/movies/\
+{any{if (file.path.lower().matchAll(/(3d|half|full|h?sbs|f?sbs|(?i)(?<=^|[^a-z])hou(?=$|[^a-z])|(?i)(?<=^|[^a-z])fou(?=$|[^a-z])|f.ou|anaglyth)(?:.sbs|(?i)(?<=^|[^a-z])cat(?=$|[^a-z]))?/)){'3D_Movies/'}}{'Movies/'}}\
+{norm = {it.upperInitial().ascii().lowerTrail().replaceTrailingBrackets().replaceAll(/[\`\´\‘\’\ʻ\"\"\“\”]/, \"\'\").replaceAll(/[-]/, \"\").replaceAll(/[:|]/, ' - ').replaceAll(/[?]/, '!').replaceAll(/[*\s]+/, ' ').replaceAll(/\b[IiVvXx]+\b/, { it.upper() }).replaceAll(/\b[0-9](?i:th| nd|rd)\b/, { it.lower() }).replaceFirst(/^(?i)(The)\s(.+)/, /\$2, \$1/)}; norm(n)}{if (norm(n) != norm(primaryTitle)) ' ('+norm(primaryTitle)+')'}\
+{any{' ('+d.format('yyyy')+')'}{y}}/ \
+{norm(n).space('.')}{'.'+any{d.format('yyyy')}{y}}{fn =~ /3D/ ? '.[3D]' : ''}\
+{fn =~ /FRENCH|French|french/ ? '.[FRENCH]' : ''}\
+{fn =~ /MULTI|multi|MULTi|Multi/ ? '.[MULTI]' : ''}\
+{'.['+vf.replaceAll('360p','SD').replaceAll('240p','LD').match(/720[pP]|1080[pP]/)+']'}\
+{'.[' + SOURCE + ']'}\
+{'.['+vc.replace('Microsoft', 'VC-1').replace('AVC', 'H264')+']'}\
+{snd = (audios.groupBy{ it.id }.collect{ c, a  -> '(' + a*.Language + '.' + a*.codec +'.' + a*.channels + 'CH)' }.flatten().join('.').replace('[','').replace(']','').upper()); \
+'.' + snd.replace('8CH', '7.1').replace('7CH', '6.1').replace('6CH', '5.1').replace('3CH', '2.1').replace('2CH','2.0').replace('(','[').replace(')',']')}\
+{'-'+fn.match(/(?<=[-])\w+$/)}" "ut_dir=$TORRENT_PATH" "ut_kind=multi" "ut_title=$TORRENT_NAME" "ut_label=Movies" &
+    ;;
+    music|musics|musique|musiques)
+        /filebot/filebot.sh --db ID3 -script fn:amc --output "/data/Media" --action symlink --conflict skip -non-strict --log-file amc.log --def excludeList=amc.excludes unsorted=y music=y "musicFormat=/data/Media/music/{n}/{fn}" "ut_dir=$TORRENT_PATH" "ut_kind=multi" "ut_title=$TORRENT_NAME" "ut_label=Music" &
+    ;;
+    tv|"tv shows"|series|serie)
+        /filebot/filebot.sh --lang fr --encoding utf8 --db TheTVDB -script fn:amc --output "/data/Media" --action symlink --conflict skip -non-strict --log-file amc.log --def excludeList=amc.excludes unsorted=y "seriesFormat=/data/Media/tv/\
+{norm = {it.upperInitial().ascii().lowerTrail().replaceTrailingBrackets().replaceAll(/[\`\´\‘\’\ʻ\"\"\“\”]/, \"\'\").replaceAll(/[:|]/, ' - ').replaceAll(/[?]/, '!').replaceAll(/[*\s]+/, ' ').replaceAll(/ Ii/, ' II').replaceAll(/ IIi/, ' III').replaceAll(/ Iv /, ' IV').replaceAll(/ Vi /, ' VI').replaceAll(/ Vii/, ' VII').replaceAll(/ Viii/, ' VIII').replaceAll(/ Ix/, ' IX').replaceAll(/ Xii/, ' XII').replaceAll(/ XIIi/, ' XIII').replaceAll(/ Xiv/, ' XIV').replaceAll(/ Xv/, ' XV').replaceAll(/ Xvi/, ' XVI').replaceAll(/ Xvii/, ' XVII').replaceAll(/ Xviii/, ' XVIII').replaceAll(/ Xix/, ' XIX').replaceAll(/ Xx/, ' XX').replaceAll(/ Xxx/, ' XXX').replaceAll(/1St/, '1st').replaceAll(/2Nd/, '2nd').replaceAll(/3Rd/, '3rd').replaceAll(/4Th/, '4th').replaceAll(/5Th/, '5th').replaceAll(/6Th/, '6th').replaceAll(/7Th/, '7th').replaceAll(/8Th/, '8th').replaceAll(/9Th/, '9th').replaceAll(/0Th/, '0th').replaceFirst(/^(?i)(The)\s(.+)/, /\$2, \$1/)}; norm(n)}{if (norm(n) != norm(primaryTitle)) ' ('+norm(primaryTitle)+')'}\
+{fn.contains('3D') || fn.contains('3-D') ? ' '+'3D':\"\"}/\
+{episode.special ? 'Saison '+s.pad(2)+'/[Specials]' : 'Saison '+s.pad(2)}/\
+{norm = {it.upperInitial().ascii().lowerTrail().replaceTrailingBrackets().replaceAll(/[\`\´\‘\’\ʻ\"\"\“\”]/, \"\'\").replaceAll(/[:|]/, ' - ').replaceAll(/[?]/, '!').replaceAll(/[*\s]+/, ' ').replaceAll(/ Ii/, ' II').replaceAll(/ IIi/, ' III').replaceAll(/ Iv /, ' IV').replaceAll(/ Vi /, ' VI').replaceAll(/ Vii/, ' VII').replaceAll(/ Viii/, ' VIII').replaceAll(/ Ix/, ' IX').replaceAll(/ Xii/, ' XII').replaceAll(/ XIIi/, ' XIII').replaceAll(/ Xiv/, ' XIV').replaceAll(/ Xv/, ' XV').replaceAll(/ Xvi/, ' XVI').replaceAll(/ Xvii/, ' XVII').replaceAll(/ Xviii/, ' XVIII').replaceAll(/ Xix/, ' XIX').replaceAll(/ Xx/, ' XX').replaceAll(/ Xxx/, ' XXX').replaceAll(/1St/, '1st').replaceAll(/2Nd/, '2nd').replaceAll(/3Rd/, '3rd').replaceAll(/4Th/, '4th').replaceAll(/5Th/, '5th').replaceAll(/6Th/, '6th').replaceAll(/7Th/, '7th').replaceAll(/8Th/, '8th').replaceAll(/9Th/, '9th').replaceAll(/0Th/, '0th').replaceFirst(/^(?i)(The)\s(.+)/, /\$2, \$1/)}; norm(n)}{if (norm(n) != norm(primaryTitle)) ' ('+norm(primaryTitle)+')'}\
+{if (y) {'.'+y }}\
+{episode.special ? '.S00E'+special.pad(2)+'.' : '.'+S00E00}\
+{fn =~ /FRENCH|French|french/ ? '.[FRENCH]' : ''}\
+{fn =~ /MULTI|MULTi|multi|MULTi|Multi/ ? '.[MULTI]' : ''}\
+{fn.contains('3D') || fn.contains('3-D') ? ' '+'.3D':''}\
+{' (' + fn.matchAll(/extended|uncensored|remastered|unrated|uncut|directors.cut|special.edition|unsold.pilot|unaired.pilot| unaired.episode/)*.upperInitial()*.lowerTrail().sort().join(', ').replaceAll(/ [._]/, ' ') + ')'}\
+{'.['+vf.replaceAll('360p','SD').replaceAll('240p','LD').match(/720[pP]|1080[pP]/)+']'}\
+{'.[' + SOURCE + ']'}\
+{'.[' + vc.replaceAll(/AVC/, \"H264\") + ']'}\
+{'.[' +af.replace('8ch', '7.1ch').replace('7ch', '6.1ch').replace('6ch', '5.1ch').replace('3ch', '2.1ch').replace('2ch','2.0ch')+']'}\
+{'.[' + ac + ']'}\
+{'.'+lang}\
+{'-'+fn.match(/(?<=[-])\w+$/)}" "ut_dir=$TORRENT_PATH" "ut_kind=multi" "ut_title=$TORRENT_NAME" "ut_label=TV" &
+    ;;
+    animes)
+        /filebot/filebot.sh --db AniDB -script fn:amc --output "/data/Media" --action symlink --conflict skip -non-strict --log-file amc.log --def excludeList=amc.excludes unsorted=y "animeFormat=/data/Media/animes/{n}/{e.pad(3)} - {t}" "ut_dir=$TORRENT_PATH" "ut_kind=multi" "ut_title=$TORRENT_NAME" "ut_label=Anime" &
+    ;;
+    *)
+        /filebot/filebot.sh -script fn:amc --output "/data/Media" --action symlink --conflict skip -non-strict --log-file amc.log --def excludeList=amc.excludes unsorted=y music=y "seriesFormat=/data/Media/tv/{n}/Season {s.pad(2)}/{s00e00} - {t}" "animeFormat=/data/Media/Animes/{n}/{e.pad(3)} - {t}" "movieFormat=/data/Media/Movies/{n} ({y})" "musicFormat=/data/Media/Music/{n}/{fn}" "ut_dir=$TORRENT_PATH" "ut_kind=multi" "ut_title=$TORRENT_NAME" "ut_label=$TORRENT_LABEL" &
+    ;;
+esac
+bash
