@@ -90,19 +90,19 @@ cat files/includes/head.docker > docker-compose.yml
 # Select apps to install
 cmd=(dialog --separate-output --checklist "Select options:" 22 85 16)
 options=("Traefik" "Proxy and certificates manager (Mandatory)" on
-         "Nextcloud" "Cloud (recommanded)" on
+         "Nextcloud" "Cloud (recommanded)" off
          "Muximux" "Application management console (recommanded)" on
 	 "Pyload" "Download : Direct download" off
          "rTorrent-f" "Download : Torrents with flood interface (Choose ONE rtorrent)" off
-         "rTorrent-r" "Download : Torrents with rutorrent interface (Choose ONE rtorrent)" off
+         "rTorrent-r" "Download : Torrents with rutorrent interface (Choose ONE rtorrent)" on
          "SABnzdb" "Download : Newsgroups" off
          "Emby" "Streaming : Video" off
-         "Plex" "Streaming : Video" off
+         "Plex" "Streaming : Video" on
          "Libresonic" "Streaming : Music" off
          "Ubooquity" "Streaming : Comics" off
-         "Radarr" "Automation : Movies" off
-         "Medusa" "Automation : TV shows" off
-         "Headphones" "Automation : Music" off
+         "Radarr" "Automation : Movies" on
+         "Medusa" "Automation : TV shows" on
+         "Headphones" "Automation : Music" on
          "Mylar" "Automation : Comics" off
 	 "VPN" "VPN Server using openvpn" off
          "Watchtower" "Tool : Auto-update apps (Heavily recommanded)" on
