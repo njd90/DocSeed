@@ -10,7 +10,7 @@
     ports:
       - 80:80
       - 443:443
-      - 8080:8080
+#      - 8080:8080
     networks:
       - traefik_proxy
     volumes:
@@ -19,6 +19,10 @@
       - CONF/traefik/traefik.toml:/etc/traefik/traefik.toml:rw
       - CONF/traefik/acme.json:/acme.json:rw
       - CONF/certs:/certs
+    labels:
+      - "traefik.frontend.rule=Host:traefik.domain.tld" # traefik will request SSL from letsencrypt
+      - "traefik.frontend.auth.basic=admin:$$apr1$$0xsgpEvq$$b4gdLKpXevNGftbaL5w5T1" # login : admin/admin
+      - "traefik.port=8080" # enable this port in so traefik can proxy it
     environment:
       - RFC2136_TSIG_KEY=RFC2136_KEY
       - RFC2136_TSIG_SECRET=RFC2136_SECRET

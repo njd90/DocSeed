@@ -20,4 +20,3 @@
       - APP_GID=1069
     networks:
       - traefik_proxy
-

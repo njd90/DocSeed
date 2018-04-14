@@ -14,7 +14,7 @@
       - CONF/headphones:/config
       - INCOMING:/downloads
       - ZIC:/music
-      - TORRENTS:/torrents      
+      - TORRENTS:/torrents
       - /etc/localtime:/etc/localtime:ro
     restart: always
     environment:

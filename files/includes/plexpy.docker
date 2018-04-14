@@ -1,0 +1,22 @@
+##########
+# PlexPY #
+##########
+   plexpy:
+    image: linuxserver/plexpy
+    container_name: tool-plex_plexpy
+    restart: always
+    hostname: plexpy
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:FQDN
+      - traefik.port=8181
+      - traefik.docker.network=traefik_proxy
+    volumes:
+      - CONF/plexpy:/config:rw
+      - CONF/plex/library/Library/Application Support/Plex Media Server/Logs:/logs:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - APP_UID=1069
+      - APP_GID=1069
+      networks:
+        - traefik_proxy

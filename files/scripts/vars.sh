@@ -40,6 +40,7 @@ Ov_SDOM=openvpn                  # OpenVPN
 Pt_SDOM=portainer                # Portainer
 Sy_SDOM=syncthing                # Syncthing
 Mx_SDOM=muximux                  # Muximux
+Py_SDM=plexpy                    # Plexpy
 
 #--- Docker options
 #- Container names
@@ -61,6 +62,7 @@ Wt_CNAME=tool-docker_Watchtower         # Watchtower
 Pt_CNAME=tool-docker_Portainer          # Portainer
 Sy_CNAME=tool-syncro_Syncthing          # Syncthing
 Mx_CNAME=tool-manage_Muximux            # Muximux
+Py_CNAME=tool-Plexpy                    # Plexpy
 
 #--- Define text colors
 CSI="\033["

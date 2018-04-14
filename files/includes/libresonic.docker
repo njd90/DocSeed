@@ -26,4 +26,3 @@
       - TERM=xterm
     networks:
       - traefik_proxy
-

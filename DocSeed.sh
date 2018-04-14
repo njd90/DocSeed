@@ -98,6 +98,7 @@ options=("Traefik" "Proxy and certificates manager (Mandatory)" on
          "SABnzdb" "Download : Newsgroups" off
          "Emby" "Streaming : Video" off
          "Plex" "Streaming : Video" on
+         "Plexpy" "Tool : Monitoring and tracking tool for Plex" on)
          "Libresonic" "Streaming : Music" off
          "Ubooquity" "Streaming : Comics" off
          "Radarr" "Automation : Movies" on
