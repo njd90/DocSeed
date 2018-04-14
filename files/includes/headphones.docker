@@ -14,6 +14,7 @@
       - CONF/headphones:/config
       - INCOMING:/downloads
       - ZIC:/music
+      - TORRENTS:/torrents      
       - /etc/localtime:/etc/localtime:ro
     restart: always
     environment:
@@ -22,4 +23,3 @@
       - TZ=Europe/Paris
     networks:
       - traefik_proxy
-

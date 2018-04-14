@@ -10,6 +10,7 @@ sed -i "s@FQDN@$Hp_SDOM.$DOMAIN@g" docker-compose.yml
 sed -i "s@INCOMING@$INC_PATH/music@g" docker-compose.yml
 sed -i "s@ZIC@$MEDIA_PATH/sound/music@g" docker-compose.yml
 sed -i "s@autodl-music_headphones@$Hp_CNAME@g" docker-compose.yml
+sed -i "s@TORRENTS@$DEFAULT_PATH/torrents@g" docker-compose.yml
 
 cat <<EOF >> files/includes/muximux.conf
 

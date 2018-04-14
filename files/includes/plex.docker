@@ -25,7 +25,10 @@
       - traefik.port=32400
       - traefik.docker.network=traefik_proxy
     volumes:
-      - MOVIES:/data:ro
+      - MOVIES:/data/movies:ro
+      - TVSHOWS:/data/tv:ro
+      - ZIC:/data/music
+      - TORRENTS:/torrents
       - CONF/plex/library:/config:rw
       - CONF/plex/transcode:/transcode:rw
       - /etc/localtime:/etc/localtime:ro

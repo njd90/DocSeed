@@ -6,6 +6,9 @@ mkdir -p $MEDIA_PATH/movies
 cat files/includes/plex.docker >> docker-compose.yml
 
 sed -i "s@MOVIES@$MEDIA_PATH/movies@g" docker-compose.yml
+sed -i "s@TVSHOWS@$MEDIA_PATH/tv@g" docker-compose.yml
+sed -i "s@ZIC@$MEDIA_PATH/sound/music@g" docker-compose.yml
+sed -i "s@TORRENTS@$DEFAULT_PATH/torrents@g" docker-compose.yml
 sed -i "s@FQDN@$Px_SDOM.$DOMAIN@g" docker-compose.yml
 sed -i "s@stream-video_plex@$Px_CNAME@g" docker-compose.yml
 
