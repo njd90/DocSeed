@@ -18,5 +18,5 @@
     environment:
       - APP_UID=1069
       - APP_GID=1069
-      networks:
-        - traefik_proxy
+    networks:
+      - traefik_proxy
