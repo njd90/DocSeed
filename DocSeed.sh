@@ -92,20 +92,20 @@ cmd=(dialog --separate-output --checklist "Select options:" 22 85 16)
 options=("Traefik" "Proxy and certificates manager (Mandatory)" on
          "Nextcloud" "Cloud (recommanded)" off
          "Muximux" "Application management console (recommanded)" on
-	 "Pyload" "Download : Direct download" off
+	       "Pyload" "Download : Direct download" off
          "rTorrent-f" "Download : Torrents with flood interface (Choose ONE rtorrent)" off
          "rTorrent-r" "Download : Torrents with rutorrent interface (Choose ONE rtorrent)" on
          "SABnzdb" "Download : Newsgroups" off
          "Emby" "Streaming : Video" off
          "Plex" "Streaming : Video" on
-         "Plexpy" "Tool : Monitoring and tracking tool for Plex" on)
+         "Plexpy" "Tool : Monitoring and tracking tool for Plex" on
          "Libresonic" "Streaming : Music" off
          "Ubooquity" "Streaming : Comics" off
          "Radarr" "Automation : Movies" on
          "Medusa" "Automation : TV shows" on
          "Headphones" "Automation : Music" on
          "Mylar" "Automation : Comics" off
-	 "VPN" "VPN Server using openvpn" off
+	       "VPN" "VPN Server using openvpn" off
          "Watchtower" "Tool : Auto-update apps (Heavily recommanded)" on
          "Portainer" "Tool : Containers management through browser (recomanded)" on
          "Syncthing" "Tool : Devices synchronisation" on)
