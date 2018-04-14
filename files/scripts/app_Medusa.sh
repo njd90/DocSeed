@@ -9,6 +9,7 @@ cat files/includes/medusa.docker >> docker-compose.yml
 sed -i "s@FQDN@$Sg_SDOM.$DOMAIN@g" docker-compose.yml
 sed -i "s@INCOMING@$INC_PATH/tv@g" docker-compose.yml
 sed -i "s@TVSHOWS@$MEDIA_PATH/tv@g" docker-compose.yml
+sed -i "s@TORRENTS@$DEFAULT_PATH/torrents@g" docker-compose.yml
 sed -i "s@autodl-tv_medusa@$Sg_CNAME@g" docker-compose.yml
 
 # Set Muximux configuration

@@ -14,6 +14,7 @@
       - CONF/medusa:/config/Medusa
       - TVSHOWS:/tv
       - INCOMING:/downloads
+      - TORRENTS:/torrents
       - /etc/localtime:/etc/localtime:ro
     restart: always
     environment:

@@ -13,6 +13,7 @@
       - CONF/radarr:/config
       - INCOMING:/downloads
       - RMOVIES:/movies
+      - TORRENTS:/torrents      
     restart: always
     environment:
       - PUID=1069

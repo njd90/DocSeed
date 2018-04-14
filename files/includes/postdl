@@ -25,7 +25,7 @@ case $TORRENT_LABEL in
 {'-'+fn.match(/(?<=[-])\w+$/)}" "ut_dir=$TORRENT_PATH" "ut_kind=multi" "ut_title=$TORRENT_NAME" "ut_label=Movies" &
     ;;
     music|musics|musique|musiques)
-        /filebot/filebot.sh --db ID3 -script fn:amc --output "/data/Media" --action symlink --conflict skip -non-strict --log-file amc.log --def excludeList=amc.excludes unsorted=y music=y "musicFormat=/data/Media/music/{n}/{fn}" "ut_dir=$TORRENT_PATH" "ut_kind=multi" "ut_title=$TORRENT_NAME" "ut_label=Music" &
+        /filebot/filebot.sh --db ID3 -script fn:amc --output "/data/Media" --action symlink --conflict skip -non-strict --log-file amc.log --def excludeList=amc.excludes unsorted=y music=y "musicFormat=/data/Media/sound/music/{n}/{fn}" "ut_dir=$TORRENT_PATH" "ut_kind=multi" "ut_title=$TORRENT_NAME" "ut_label=Music" &
     ;;
     tv|"tv shows"|series|serie)
         /filebot/filebot.sh --lang fr --encoding utf8 --db TheTVDB -script fn:amc --output "/data/Media" --action symlink --conflict skip -non-strict --log-file amc.log --def excludeList=amc.excludes unsorted=y "seriesFormat=/data/Media/tv/\

@@ -9,6 +9,7 @@ cat files/includes/radarr.docker >> docker-compose.yml
 sed -i "s@FQDN@$Rd_SDOM.$DOMAIN@g" docker-compose.yml
 sed -i "s@INCOMING@$INC_PATH/movies@g" docker-compose.yml
 sed -i "s@RMOVIES@$MEDIA_PATH/movies@g" docker-compose.yml
+sed -i "s@TORRENTS@$DEFAULT_PATH/torrents@g" docker-compose.yml
 sed -i "s@autodl-movies_radarr@$Rd_CNAME@g" docker-compose.yml
 
 # Set Muximux configuration
