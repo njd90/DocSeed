@@ -3,7 +3,7 @@
 
 cat files/includes/plexpy.docker >> docker-compose.yml
 
-sed -i "s@FQDN@$Px_SDOM.$DOMAIN@g" docker-compose.yml
+sed -i "s@FQDN@$Py_SDOM.$DOMAIN@g" docker-compose.yml
 sed -i "s@tool-plex_plexpy@$Py_CNAME@g" docker-compose.yml
 
 cat <<EOF >> files/includes/muximux.conf
@@ -12,8 +12,8 @@ cat <<EOF >> files/includes/muximux.conf
 name = "PlexPY"
 url = "https://192.168.42.52"
 scale = 1
-icon = "muximux-plex"
-color = "#f9be03"
+icon = "muximux-plexivity"
+color = "#ffff00"
 enabled = "true"
 EOF
 
