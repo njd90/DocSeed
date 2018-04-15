@@ -39,7 +39,7 @@ Ov_SDOM=openvpn                  # OpenVPN
 Pt_SDOM=portainer                # Portainer
 Sy_SDOM=syncthing                # Syncthing
 Mx_SDOM=muximux                  # Muximux
-Py_SDM=plexpy                    # Plexpy
+Py_SDOM=plexpy                    # Plexpy
 
 #--- Docker options
 #- Container names
