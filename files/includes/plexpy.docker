@@ -2,7 +2,7 @@
 # PlexPY #
 ##########
    plexpy:
-    image: linuxserver/plexpy
+    image: shiggins8/tautulli
     container_name: tool-plex_plexpy
     restart: always
     hostname: plexpy
